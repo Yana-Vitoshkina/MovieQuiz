@@ -5,12 +5,17 @@ final class MovieQuizViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        imageView.layer.cornerRadius = 20
+        imageView.layer.masksToBounds = true
+        
         show(quiz: convert(model: questions[currentQuestionIndex]))
     }
     
     @IBOutlet private var imageView: UIImageView!
     @IBOutlet private var textLabel: UILabel!
     @IBOutlet private var counterLabel: UILabel!
+    @IBOutlet private var noButton: UIButton!
+    @IBOutlet private var yesButton: UIButton!
     
     // метод вызывается, когда пользователь нажимает на кнопку "Да"
     @IBAction private func yesButtonClicked(_ sender: UIButton) {
@@ -120,6 +125,7 @@ final class MovieQuizViewController: UIViewController {
     
     // приватный метод вывода на экран вопроса, который принимает на вход вью модель вопроса и ничего не возвращает
     private func show(quiz step: QuizStepViewModel) {
+        imageView.layer.borderWidth = 0
         imageView.image = step.image
         textLabel.text = step.question
         counterLabel.text = step.questionNumber
@@ -128,22 +134,27 @@ final class MovieQuizViewController: UIViewController {
     // приватный метод, который меняет цвет рамки
     // принимает на вход булевое значение и ничего не возвращает
     private func showAnswerResult(isCorrect: Bool) {
-        if isCorrect { // 1
-            correctAnswers += 1 // 2
+        if isCorrect {
+            correctAnswers += 1
         }
+        
+        // отключаем кнопки на время индикации
+        yesButton.isEnabled = false
+        noButton.isEnabled = false
     
-        imageView.layer.masksToBounds = true
         imageView.layer.borderWidth = 8
         imageView.layer.borderColor = isCorrect ? UIColor(named: "YP Green")?.cgColor : UIColor(named: "YP Red")?.cgColor
-        imageView.layer.cornerRadius = 20
-        
+                
         // запускаем задачу через 1 секунду c помощью диспетчера задач
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
            // код, который мы хотим вызвать через 1 секунду
            self.showNextQuestionOrResults()
+            
+        // включаем кнопки обратно — новый вопрос уже на экране
+        self.yesButton.isEnabled = true
+        self.noButton.isEnabled = true
         }
     }
-    
     
     // приватный метод, который содержит логику перехода в один из сценариев
     private func showNextQuestionOrResults() {
