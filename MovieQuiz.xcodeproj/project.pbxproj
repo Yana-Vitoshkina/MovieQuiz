@@ -28,6 +28,7 @@
 		D7BA2C0430AB00D60034D9CC /* AlertPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7BA2C0330AB00D40034D9CC /* AlertPresenter.swift */; };
 		D7BA2C0630ADC5900034D9CC /* StatisticServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7BA2C0530ADC5840034D9CC /* StatisticServiceProtocol.swift */; };
 		D7BA2C0830ADC67C0034D9CC /* StatisticService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7BA2C0730ADC6790034D9CC /* StatisticService.swift */; };
+		D7BA2C0A30B0AC800034D9CC /* AppStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7BA2C0930B0AC7F0034D9CC /* AppStrings.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +55,7 @@
 		D7BA2C0330AB00D40034D9CC /* AlertPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertPresenter.swift; sourceTree = "<group>"; };
 		D7BA2C0530ADC5840034D9CC /* StatisticServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticServiceProtocol.swift; sourceTree = "<group>"; };
 		D7BA2C0730ADC6790034D9CC /* StatisticService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticService.swift; sourceTree = "<group>"; };
+		D7BA2C0930B0AC7F0034D9CC /* AppStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStrings.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +123,7 @@
 		ADF0CF75283FDAA10075F54D /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				D7BA2C0930B0AC7F0034D9CC /* AppStrings.swift */,
 				AD5EE5DD284D7887003966EF /* UIColor+Extensions.swift */,
 				AD7AFA542836189F00399704 /* Array+Extensions.swift */,
 				AD77F5732857F8810062FB14 /* Date+Extensions.swift */,
@@ -244,6 +247,7 @@
 				D7BA2BFE30AAF72A0034D9CC /* QuestionFactoryDelegate.swift in Sources */,
 				AD1ABAB62831907B00B3E448 /* MovieQuizViewController.swift in Sources */,
 				D7BA2C0630ADC5900034D9CC /* StatisticServiceProtocol.swift in Sources */,
+				D7BA2C0A30B0AC800034D9CC /* AppStrings.swift in Sources */,
 				D7BA2C0830ADC67C0034D9CC /* StatisticService.swift in Sources */,
 				D78418F530A759D200BCA706 /* QuizQuestion.swift in Sources */,
 				AD77F5742857F8810062FB14 /* Date+Extensions.swift in Sources */,

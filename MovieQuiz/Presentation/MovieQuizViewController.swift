@@ -19,7 +19,7 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate {
     // MARK: - QuestionFactoryDelegate
     func didReceiveNextQuestion(question: QuizQuestion?) {
         // проверка, что вопрос не nil
-        guard let question = question else {
+        guard let question else {
             return
         }
 
@@ -31,30 +31,30 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate {
         }
     }
     
-    @IBOutlet private var imageView: UIImageView!
-    @IBOutlet private var textLabel: UILabel!
-    @IBOutlet private var counterLabel: UILabel!
-    @IBOutlet private var noButton: UIButton!
-    @IBOutlet private var yesButton: UIButton!
+    // MARK: - IBOutlets
+    @IBOutlet private weak var imageView: UIImageView!
+    @IBOutlet private weak var textLabel: UILabel!
+    @IBOutlet private weak var counterLabel: UILabel!
+    @IBOutlet private weak var noButton: UIButton!
+    @IBOutlet private weak var yesButton: UIButton!
     
-    // метод вызывается, когда пользователь нажимает на кнопку "Да"
-    @IBAction private func yesButtonClicked(_ sender: UIButton) {
+    // MARK: - IBActions
+    private func answerCurrentQuestion(_ answer: Bool) {
         guard let currentQuestion = currentQuestion else {
             return
         }
-        let givenAnswer = true
-        
-        showAnswerResult(isCorrect: givenAnswer == currentQuestion.correctAnswer)
+
+        showAnswerResult(
+            isCorrect: answer == currentQuestion.correctAnswer
+        )
     }
     
-    // метод вызывается, когда пользователь нажимает на кнопку "Нет"
+    @IBAction private func yesButtonClicked(_ sender: UIButton) {
+        answerCurrentQuestion(true)
+    }
+
     @IBAction private func noButtonClicked(_ sender: UIButton) {
-        guard let currentQuestion = currentQuestion else {
-            return
-        }
-        let givenAnswer = false
-        
-        showAnswerResult(isCorrect: givenAnswer == currentQuestion.correctAnswer)
+        answerCurrentQuestion(false)
     }
     
     // переменная с индексом текущего вопроса, начальное значение 0
@@ -68,7 +68,8 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate {
     private var alertPresenter = AlertPresenter()
     private var statisticService: StatisticServiceProtocol!
     
-    
+    // MARK: - Private Methods
+
     // приватный метод конвертации, который принимает моковый вопрос и возвращает вью модель для главного экрана
     private func convert(model: QuizQuestion) -> QuizStepViewModel {
         let questionStep = QuizStepViewModel(
@@ -120,9 +121,9 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate {
             
             // идём в состояние "Результат квиза"
             let viewModel = QuizResultsViewModel(
-                title: "Этот раунд окончен!",
+                title: AppStrings.roundOver,
                 text: makeResultsMessage(),
-                buttonText: "Сыграть ещё раз")
+                buttonText: AppStrings.playAgain)
             show(quiz: viewModel)
         } else {
             currentQuestionIndex += 1
@@ -141,7 +142,7 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate {
         let correct = bestGame.correct
         let total = bestGame.total
         
-        let message = "Ваш результат: \(correctAnswers)/10\nКоличество сыгранных квизов: \(gamesCount)\nРекорд: \(correct)/\(total) (\(dateText))\nСредняя точность: \(totalAccuracy)%"
+        let message = "\(AppStrings.yourResult) \(correctAnswers)/\(questionsAmount)\n\(AppStrings.gamesCount) \(gamesCount)\n\(AppStrings.bestRecord) \(correct)/\(total) (\(dateText))\n\(AppStrings.averageAccuracy) \(totalAccuracy)%"
         return message
     }
     
